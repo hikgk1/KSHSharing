@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">KSHSharing</string>
+    <string name="edit_message">Enter image id</string>
+    <string name="button_send">Send</string>
+    <string name="button_get">Get</string>
+</resources>
