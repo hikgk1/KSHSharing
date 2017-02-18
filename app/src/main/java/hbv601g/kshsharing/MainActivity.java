@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public final static String EXTRA_MESSAGE = "hbv601g.kshsharing.MESSAGE";
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
