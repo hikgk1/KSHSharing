@@ -3,4 +3,8 @@
     <string name="edit_message">Enter image id</string>
     <string name="button_send">Send</string>
     <string name="button_get">Get</string>
+    <string name="button_select">Take photo</string>
+    <string name="button_select2">Pick photo</string>
+    <string name="image_name">Enter image name</string>
+    <string name="image_tags">Enter image tags</string>
 </resources>

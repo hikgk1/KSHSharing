@@ -84,7 +84,7 @@ public class DisplayImageActivity extends AppCompatActivity {
                 res.setTags(response.getString("tags"));
                 res.setUuid(response.getString("uuid"));
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
 
             InputStream in = null;
