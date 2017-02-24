@@ -10,27 +10,11 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Cache;
-import com.android.volley.Network;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
@@ -42,19 +26,15 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Hashtable;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "hbv601g.kshsharing.MESSAGE";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_PICK_IMAGE = 2;
     Uri mCurrentPhotoPath;
-    private RequestQueue mRequestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            //Resource resource = new ClassPathResource("res/drawable/spring09_logo.png");
             Resource image = null;
 
             try {
@@ -155,9 +134,22 @@ public class MainActivity extends AppCompatActivity {
 
             // populate the data to post
             formData = new LinkedMultiValueMap<String, Object>();
-            formData.add("name", name);
-            formData.add("image", image);
-            formData.add("tags", tags);
+
+            HttpHeaders nameHeader = new HttpHeaders();
+            nameHeader.add("Content-Disposition", "form-data; name=name");
+            HttpEntity<String> nameEntity = new HttpEntity<String>(name, nameHeader);
+            formData.add("name", nameEntity);
+
+            HttpHeaders imageHeader = new HttpHeaders();
+            imageHeader.add("Content-Disposition", "form-data; name=image; filename=test.jpeg");
+            imageHeader.setContentType(MediaType.IMAGE_JPEG);
+            HttpEntity<Object> imageEntity = new HttpEntity<Object>(image, imageHeader);
+            formData.add("image", imageEntity);
+
+            HttpHeaders tagsHeader = new HttpHeaders();
+            nameHeader.add("Content-Disposition", "form-data; name=tags");
+            HttpEntity<String> tagsEntity = new HttpEntity<String>(tags, tagsHeader);
+            formData.add("tags", tagsEntity);
         }
 
         @Override
@@ -193,86 +185,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-
+            Log.d("Niðurstaða", result);
         }
 
     }
-
-    /*private class SendImageTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... message) {
-            uploadImage();
-            return "blaf";
-        }
-
-        protected void onPostExecute(String result) {
-
-        }
-    }
-
-    private void uploadImage(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://group28hbv501g2016.herokuapp.com/uploadr/",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        Log.d("Virkaði", s);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        volleyError.printStackTrace();
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                //Converting Bitmap to String
-                Bitmap bitmap = null;
-                try {
-                    InputStream is = getContentResolver().openInputStream(mCurrentPhotoPath);
-                    bitmap = BitmapFactory.decodeStream(is);
-                    if (is != null) is.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                String image = getStringImage(bitmap);
-
-                EditText editText = (EditText) findViewById(R.id.image_name);
-                String name = editText.getText().toString();
-
-                editText = (EditText) findViewById(R.id.image_tags);
-                String tags = editText.getText().toString();
-
-                //Creating parameters
-                Map<String,String> params = new Hashtable<String, String>();
-
-                //Adding parameters
-                params.put("image", image);
-                params.put("name", name);
-                params.put("tags", tags);
-
-                //returning parameters
-                return params;
-            }
-        };
-
-        //Creating a Request Queue
-        //RequestQueue requestQueue = Volley.newRequestQueue(this);
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024 * 50);
-        Network network = new BasicNetwork(new HurlStack());
-        mRequestQueue = new RequestQueue(cache, network);
-        mRequestQueue.start();
-
-        //Adding request to the queue
-        mRequestQueue.add(stringRequest);
-    }
-
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
-    }*/
 
     private File createImageFile() throws IOException {
         // Create an image file name
