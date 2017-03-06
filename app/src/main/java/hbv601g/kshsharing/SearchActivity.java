@@ -37,15 +37,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void setGallery(JSONArray list) {
-        // Bráðabirgða til að prófa hvort leitin hafi virkað
-        if(list != null) {
-            try {
-                JSONObject test = list.getJSONObject(0);
-                Log.d("Niðurstaða 0", test.getString("uuid"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        Intent intent = DisplayGalleryActivity.displayIntent(this, list.toString());
+        startActivity(intent);
     }
 
     private class SearchByTagsTask extends AsyncTask<Void , Void, JSONArray> {

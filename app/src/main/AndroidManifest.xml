@@ -29,8 +29,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".SearchActivity"
-                  android:label="@string/title_activity_search">
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -57,6 +58,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".DisplayGalleryActivity"
+                  android:label="@string/title_activity_gallery">
+        </activity>
     </application>
 
 </manifest>

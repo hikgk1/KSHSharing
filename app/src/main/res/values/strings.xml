@@ -17,4 +17,5 @@
     <string name="title_activity_display">Image</string>
     <string name="title_activity_selection">Upload/Download</string>
     <string name="title_activity_search">Search</string>
+    <string name="title_activity_gallery">Gallery</string>
 </resources>
