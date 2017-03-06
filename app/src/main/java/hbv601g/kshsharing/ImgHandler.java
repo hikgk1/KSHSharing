@@ -40,9 +40,7 @@ import java.util.concurrent.TimeUnit;
  *
  * Erum sennilega hættir við að nota þennan klasa.
  * Allt of mikið vesen að fá hann til að virka eins og við settum þetta upp í UML diagraminu.
- * Virknin er í staðin í SelectionActivity og DisplayImageActivity
- * SelectionActivity sér um að uploada myndum
- * DisplayImageActivity sér um að downloada myndum
+ * Virknin er í staðin í viðeigandi activity klössum
  */
 
 class ImgHandler {
