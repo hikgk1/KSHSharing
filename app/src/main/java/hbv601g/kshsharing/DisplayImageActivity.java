@@ -7,8 +7,9 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -64,8 +65,10 @@ public class DisplayImageActivity extends AppCompatActivity {
     }
 
     private void setImage(UserImageContainer image) {
-        if(image == null || image.getUuid().equals("Error")) return;
+        if(image == null || image.getUuid() == null || image.getUuid().equals("Error")) return;
         final ImageView imageView = (ImageView) findViewById(R.id.imageDisplay);
+        final TextView textView = (TextView) findViewById(R.id.imageNameDisplay);
+        final TextView tagsView = (TextView) findViewById(R.id.imageTagsDisplay);
         Bitmap tmp = image.getImage();
         // Getur ekki skalað myndina inn í ImageView ef víddir myndarinnar eru meira en 4096
         if(tmp.getWidth() > 4096 || tmp.getHeight() > 4096) {
@@ -74,6 +77,8 @@ public class DisplayImageActivity extends AppCompatActivity {
             tmp = Bitmap.createScaledBitmap(tmp, tmp.getWidth() / 2, tmp.getHeight() / 2, false);
         }
         imageView.setImageBitmap(tmp);
+        textView.setText(String.format((String)getResources().getText(R.string.display_name), image.getName()));
+        tagsView.setText(String.format((String)getResources().getText(R.string.display_tags), image.getTags()));
     }
 
     private class GetImageTask extends AsyncTask<String, Void, UserImageContainer> {
@@ -104,12 +109,11 @@ public class DisplayImageActivity extends AppCompatActivity {
                 }
 
                 // Sækja myndina sjálfa
-                Toast.makeText(getApplicationContext(), "Downloading image", Toast.LENGTH_LONG).show();
                 String urlString =  mImgUrl + res.getUuid() + res.getEnding();
+                Log.d("strengur", urlString);
                 in = new URL(urlString).openStream();
                 res.setImage(BitmapFactory.decodeStream(in));
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Encountered an error", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             } finally {
                 try { if(in != null) in.close(); } catch (Exception e) { e.printStackTrace(); }

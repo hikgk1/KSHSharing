@@ -59,8 +59,21 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".DisplayGalleryActivity"
-                  android:label="@string/title_activity_gallery">
+        <activity
+            android:name=".DisplayGalleryActivity"
+            android:label="@string/title_activity_gallery">
+        </activity>
+        <activity
+            android:name=".GetImageActivity"
+            android:label="@string/title_activity_get">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".ViewUserActivity"
+            android:label="@string/title_activity_profile">
+
         </activity>
     </application>
 

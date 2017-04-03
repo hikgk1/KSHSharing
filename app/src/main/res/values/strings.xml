@@ -6,8 +6,10 @@
     <string name="button_get">Get</string>
     <string name="button_select">Take photo</string>
     <string name="button_select2">Pick photo</string>
-    <string name="button_selection">Upload/download image</string>
+    <string name="button_selection">Upload image</string>
+    <string name="button_getimage">Download image</string>
     <string name="button_search">Search by tag</string>
+    <string name="button_user">View user info</string>
     <string name="image_name">Enter image name</string>
     <string name="image_tags">Enter image tags</string>
     <string name="url_upload">https://group28hbv501g2016.herokuapp.com/uploadr/</string>
@@ -15,7 +17,11 @@
     <string name="url_search">https://group28hbv501g2016.herokuapp.com/searchr/</string>
     <string name="url_downloadImg">http://group28hbv501g2016.s3-website-eu-west-1.amazonaws.com/images/</string>
     <string name="title_activity_display">Image</string>
-    <string name="title_activity_selection">Upload/Download</string>
+    <string name="title_activity_selection">Upload</string>
     <string name="title_activity_search">Search</string>
     <string name="title_activity_gallery">Gallery</string>
+    <string name="title_activity_get">Download</string>
+    <string name="title_activity_profile">User profile</string>
+    <string name="display_name">Name: %1$s</string>
+    <string name="display_tags">Tags: %1$s</string>
 </resources>

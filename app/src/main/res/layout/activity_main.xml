@@ -22,12 +22,30 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_search"
-            android:onClick="gotoSearch" />
+            android:text="@string/button_getimage"
+            android:onClick="gotoGetImage" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_selection"
             android:onClick="gotoSelection" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="0dp"
+        android:paddingBottom="20dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_search"
+            android:onClick="gotoSearch" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_user"
+            android:onClick="gotoViewUser" />
     </LinearLayout>
 </LinearLayout>

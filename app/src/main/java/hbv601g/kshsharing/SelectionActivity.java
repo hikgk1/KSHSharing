@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 import org.springframework.core.io.InputStreamResource;
@@ -49,11 +48,11 @@ public class SelectionActivity extends AppCompatActivity {
 
     // Sækir uuid úr textaboxinu og færir sig svo yfir í startViewIntent
     // Er skipt upp til að það sé hægt að færa sig yfir í DisplayImageActivity án þess að þurfa að nota textaboxið
-    public void getImage(View view) {
+    /*public void getImage(View view) {
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         startViewIntent(message);
-    }
+    }*/
 
     private void startViewIntent(String message) {
         Intent intent = DisplayImageActivity.displayIntent(this, message);
@@ -189,7 +188,6 @@ public class SelectionActivity extends AppCompatActivity {
                 // Create a new RestTemplate instance
                 RestTemplate restTemplate = new RestTemplate();
 
-                Toast.makeText(getApplicationContext(), "Uploading your image", Toast.LENGTH_LONG).show();
                 // Make the network request, posting the message, expecting a String in response from the server
                 ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
 
@@ -212,7 +210,6 @@ public class SelectionActivity extends AppCompatActivity {
                 if(!res.getString("uuid").equals("Error")) {
                     startViewIntent(res.getString("uuid"));
                 } else {
-                    Toast.makeText(getApplicationContext(), "Upload failed", Toast.LENGTH_LONG).show();
                     throw new Exception();
                 }
             } catch (Exception e) {

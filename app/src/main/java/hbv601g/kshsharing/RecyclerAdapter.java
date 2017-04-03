@@ -1,6 +1,7 @@
 package hbv601g.kshsharing;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -40,7 +41,7 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     // Setja mynd/nafn í holderinn þegar RecycleView biður um það
     @Override
-    public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerAdapter.ViewHolder holder, int position) {
         holder.title.setText(galleryList.get(position).getName());
         holder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
@@ -56,7 +57,9 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"Kemur seinna",Toast.LENGTH_SHORT).show();
+                Intent intent = DisplayImageActivity.displayIntent(context, galleryList.get(holder.getLayoutPosition()).getUuid());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
     }

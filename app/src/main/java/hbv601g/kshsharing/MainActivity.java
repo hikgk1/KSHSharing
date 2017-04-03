@@ -28,4 +28,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = SearchActivity.searchIntent(this);
         startActivity(intent);
     }
+
+    public void gotoGetImage(View view) {
+        Intent intent = GetImageActivity.getImageIntent(this);
+        startActivity(intent);
+    }
+
+    public void gotoViewUser(View view) {
+        Intent intent = ViewUserActivity.viewUserIntent(this);
+        startActivity(intent);
+    }
 }
