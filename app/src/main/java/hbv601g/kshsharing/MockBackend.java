@@ -18,6 +18,7 @@ class MockBackend {
     static Vector<Integer> getUserFriends(int userId) {
         Vector<Integer> res = new Vector<>();
         res.add(5001);
+        res.add(5002);
         return res;
     }
 
@@ -29,7 +30,21 @@ class MockBackend {
     }
 
     static String getFriendName(int friendId) {
-        if(friendId == 5001) return "Jón Jónsson";
-        return "Fann ekki nafn";
+        switch(friendId) {
+            case 5001:
+                return "Jón Jónsson";
+            case 5002:
+                return "Guðríður Guðríðardóttir";
+            default:
+                return "Fann ekki nafn";
+        }
+    }
+
+    static void addUpload(String uuid) {
+
+    }
+
+    static void addFriend(int friendId) {
+
     }
 }

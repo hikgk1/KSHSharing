@@ -35,6 +35,7 @@ public class SelectionActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_PICK_IMAGE = 2;
     Uri mCurrentPhotoPath;
+    private ProfileActions mProfile;
 
     public static Intent selectionIntent(Context packageContext) {
         return new Intent(packageContext, SelectionActivity.class);
@@ -44,17 +45,11 @@ public class SelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
+        mProfile = ProfileActions.getInstance(this);
     }
 
-    // Sækir uuid úr textaboxinu og færir sig svo yfir í startViewIntent
-    // Er skipt upp til að það sé hægt að færa sig yfir í DisplayImageActivity án þess að þurfa að nota textaboxið
-    /*public void getImage(View view) {
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        startViewIntent(message);
-    }*/
-
     private void startViewIntent(String message) {
+        mProfile.addUserUpload(message);
         Intent intent = DisplayImageActivity.displayIntent(this, message);
         startActivity(intent);
     }

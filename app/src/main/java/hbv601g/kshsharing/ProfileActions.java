@@ -2,9 +2,6 @@ package hbv601g.kshsharing;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import org.json.JSONObject;
-
 import java.util.Vector;
 
 /**
@@ -49,6 +46,16 @@ class ProfileActions {
         return MockBackend.getFriendName(userId);
     }
 
+    void addUserFriend(int friendId) {
+        mUser.friendsList.add(friendId);
+        MockBackend.addFriend(friendId);
+    }
+
+    void addUserUpload(String uuid) {
+        mUser.uploadList.add(uuid);
+        MockBackend.addUpload(uuid);
+    }
+
     private class UserProfile {
         int userId;
         String userName;
@@ -60,7 +67,7 @@ class ProfileActions {
                 String newName = "Awesome User"; // TODO: Fá frá notanda
                 int newId = MockBackend.getNewUserId(newName);
                 mSharedPref.edit().putInt(GPROFILE, newId).apply();
-                this.userId = userId;
+                this.userId = newId;
             } else {
                 this.userId = userId;
             }

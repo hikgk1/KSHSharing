@@ -24,4 +24,8 @@
     <string name="title_activity_profile">User profile</string>
     <string name="display_name">Name: %1$s</string>
     <string name="display_tags">Tags: %1$s</string>
+    <string name="profile_user_id">UserID: %1$s</string>
+    <string name="profile_user_name">Name: %1$s</string>
+    <string name="profile_user_friends">Friends:</string>
+    <string name="profile_user_uploads">Uploads:</string>
 </resources>

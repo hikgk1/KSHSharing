@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -48,6 +47,9 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         Bitmap img = null;
         try {
             img = new GetImageTask().execute(position).get(30, TimeUnit.SECONDS);
+            if(img.getWidth() > 4096 || img.getHeight() > 4096) {
+                img = Bitmap.createScaledBitmap(img, img.getWidth() / 2, img.getHeight() / 2, false);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
